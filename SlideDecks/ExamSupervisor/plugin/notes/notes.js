@@ -91,8 +91,9 @@ var RevealNotes = (function() {
 
 			// Look for notes defined in an aside element
 			if( notesElement ) {
-				messageData.notes = notesElement.innerHTML;
-				messageData.markdown = typeof notesElement.getAttribute( 'data-markdown' ) === 'string';
+				const sanitizedHtml = Joomla.sanitizeHtml(notesElement.innerHTML);
+				messageData.notes = sanitizedHtml;
+				messageData.markdown = typeof notesElement.getAttribute('data-markdown') === 'string';
 			}
 
 			notesPopup.postMessage( JSON.stringify( messageData ), '*' );
